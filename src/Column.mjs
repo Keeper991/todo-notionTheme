@@ -1,37 +1,23 @@
 import CreateBtn from "./CreateBtn.mjs";
+import Item from "./Item.mjs";
 
 class Column {
-  _name = "";
-  _lCol = null;
-  _rCol = null;
-  _list = [];
-
-  constructor(app, name) {
-    this._name = name;
-
+  constructor(name) {
     const column = document.createElement("section");
     column.className = "column";
 
     const header = document.createElement("header");
-    header.innerHTML = this._name.toUpperCase();
+    header.className = "column__header";
+    header.innerHTML = name.toUpperCase();
+
+    const ul = document.createElement("ul");
 
     column.appendChild(header);
-    app.appendChild(column);
+    column.appendChild(ul);
 
-    new CreateBtn(column);
-  }
+    column.appendChild(new CreateBtn(() => ul.prepend(new Item())));
 
-  setColumn(lCol, rCol) {
-    this._lCol = lCol;
-    this._rCol = rCol;
-  }
-
-  pushList(item) {
-    this._list.push(item);
-  }
-
-  popList(item) {
-    return this._list.find((i) => i === item);
+    return column;
   }
 }
 

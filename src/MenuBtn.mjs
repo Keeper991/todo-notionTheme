@@ -1,12 +1,12 @@
-class CreateBtn {
+class MenuBtn {
   constructor(onClick) {
     const btn = document.createElement("button");
-    btn.className = "createBtn";
-    btn.innerHTML = "+ Create New Item";
+    btn.className = "menuBtn";
+    btn.innerHTML = "∙∙∙";
     btn.addEventListener("click", onClick);
 
     return btn;
   }
 }
 
-export default CreateBtn;
+export default MenuBtn;

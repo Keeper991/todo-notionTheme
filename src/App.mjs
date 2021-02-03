@@ -1,14 +1,14 @@
 import Column from "./Column.mjs";
+import ItemMenu from "./ItemMenu.mjs";
 
 class App {
-  constructor(app) {
-    const toDo = new Column("To Do");
-    const doing = new Column("Doing");
-    const done = new Column("Done");
+  constructor(app, columnData) {
+    columnData.map((cd) => {
+      app.appendChild(new Column(cd));
+    });
 
-    app.appendChild(toDo);
-    app.appendChild(doing);
-    app.appendChild(done);
+    ItemMenu.attatchParent(app);
+    ItemMenu.setColumnData(columnData);
   }
 }
 

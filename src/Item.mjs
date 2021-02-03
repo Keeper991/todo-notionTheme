@@ -1,18 +1,38 @@
-import Menu from "./Menu.mjs";
+import ItemMenu from "./ItemMenu.mjs";
 import MenuBtn from "./MenuBtn.mjs";
 
 class Item {
-  constructor(data) {
-    const li = document.createElement("li");
-    li.className = "item";
+  _columnName = null;
+  _item = document.createElement("li");
+
+  constructor(columnName) {
+    this._columnName = columnName;
+
+    this._item.className = "item";
 
     const input = document.createElement("input");
     input.placeholder = "내용을 입력하세요.";
 
-    li.appendChild(input);
-    li.appendChild(new MenuBtn());
+    this._item.appendChild(input);
+    this._item.appendChild(
+      new MenuBtn(() => {
+        ItemMenu.setItemData(this);
+      })
+    );
 
-    return li;
+    return this._item;
+  }
+
+  get columnName() {
+    return this._columnName;
+  }
+
+  set columnName(name) {
+    this._columnName = name;
+  }
+
+  get item() {
+    return this._item;
   }
 }
 

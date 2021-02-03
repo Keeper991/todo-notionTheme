@@ -1,3 +1,18 @@
 import App from "./App.mjs";
 
-new App(document.getElementById("App"));
+const columnData = [
+  {
+    name: "todo",
+    title: "To Do",
+  },
+  {
+    name: "doing",
+    title: "Doing",
+  },
+  {
+    name: "done",
+    title: "Done",
+  },
+];
+
+new App(document.getElementById("App"), columnData);

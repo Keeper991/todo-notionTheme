@@ -18,10 +18,15 @@ class ItemMenu {
     const menuUl = document.createElement("ul");
     menuUl.className = "menu";
 
-    const li = document.createElement("li");
+    const selectLi = document.createElement("li");
 
-    li.appendChild(this._select);
-    menuUl.appendChild(li);
+    const deleteLi = document.createElement("li");
+    deleteLi.innerHTML = "Delete";
+    deleteLi.addEventListener("click", () => this.handleDelete());
+
+    selectLi.appendChild(this._select);
+    menuUl.appendChild(selectLi);
+    menuUl.appendChild(deleteLi);
     this._menu.appendChild(menuUl);
   }
 
@@ -60,6 +65,14 @@ class ItemMenu {
 
     this._columnName = selectedName;
     this._itemInst.columnName = selectedName;
+  }
+
+  handleDelete() {
+    const curList = document.querySelector(`.column.${this._columnName} ul`);
+    curList.removeChild(this._item);
+
+    delete this._itemInst;
+    this._menu.classList.remove("active");
   }
 }
 

@@ -1,22 +1,20 @@
 import App from "./App.mjs";
 
 class ItemMenu {
-  _menu = document.createElement("div");
+  _menu = document.createElement("ul");
+  _overlay = document.createElement("div");
   _select = document.createElement("select");
   _itemInst = null;
   _item = null;
   _columnName = null;
 
   constructor() {
-    this._menu.className = "menu-wrapper";
-    this._menu.addEventListener("click", (e) => {
-      if (e.target === this._menu) this._menu.classList.remove("active");
-    });
+    this._menu.className = "menu";
+
+    this._overlay.className = "menu-overlay";
+    this._overlay.addEventListener("click", () => this.inactive());
 
     this._select.addEventListener("change", () => this.handleSelect());
-
-    const menuUl = document.createElement("ul");
-    menuUl.className = "menu";
 
     const selectLi = document.createElement("li");
 
@@ -25,9 +23,13 @@ class ItemMenu {
     deleteLi.addEventListener("click", () => this.handleDelete());
 
     selectLi.appendChild(this._select);
-    menuUl.appendChild(selectLi);
-    menuUl.appendChild(deleteLi);
-    this._menu.appendChild(menuUl);
+    this._menu.appendChild(selectLi);
+    this._menu.appendChild(deleteLi);
+  }
+
+  inactive() {
+    this._menu.classList.remove("active");
+    this._overlay.classList.remove("active");
   }
 
   setItemData(itemInst) {
@@ -38,6 +40,7 @@ class ItemMenu {
 
     // active item menu
     this._menu.classList.add("active");
+    this._overlay.classList.add("active");
   }
 
   setColumnData(columnData) {
@@ -49,6 +52,7 @@ class ItemMenu {
   }
 
   attatchParent(parent) {
+    parent.appendChild(this._overlay);
     parent.appendChild(this._menu);
   }
 
@@ -72,7 +76,7 @@ class ItemMenu {
     curList.removeChild(this._item);
 
     delete this._itemInst;
-    this._menu.classList.remove("active");
+    this.inactive();
   }
 }
 

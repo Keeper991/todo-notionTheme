@@ -9,7 +9,7 @@ class Column {
 
     const header = document.createElement("header");
     header.className = "column__header";
-    header.innerHTML = title.toUpperCase();
+    header.innerHTML = `<span>${title.toUpperCase()}</span>`;
 
     const ul = document.createElement("ul");
 

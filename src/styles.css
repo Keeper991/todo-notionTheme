@@ -1,7 +1,7 @@
 :root {
   --white: #FFFFFF;
   --dark-gray: rgba(149, 165, 166, 1);
-  --gray: rgba(149, 165, 166, 0.5);
+  --gray: #C4CDCD;
   --silver: rgba(189, 195, 199, 0.5);
   --white-gray: rgba(236, 240, 241, 0.7);
   --border-radius: .4em;
@@ -34,13 +34,33 @@ select {
   padding: 1em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 1em;
   background-color: var(--white);
 }
 
-.column header{
-  margin-bottom: 1em;
-  font-weight: 800;
+.column {
+  position: relative; 
+  overflow-y: scroll;
+  scroll-behavior: none;
+}
+
+.column__header {
+  position: sticky;
+  top: 0;
+  padding: .5em 0;
+  background-color: var(--white);
+  z-index: 1;
+}
+
+.column__header > span {
+  background-color: #badc58;
+  padding: .2em .75em;
+  border-radius: var(--border-radius);
+}
+
+.column ul {
+  margin-top: .5em;
 }
 
 .column li,
@@ -83,7 +103,8 @@ select {
   align-items: center;
   background-color: var(--white);
   opacity: 0;
-  transition: opacity .2s linear
+  transition: opacity .2s linear;
+  cursor: pointer;
 }
 
 .column li:hover .menuBtn {

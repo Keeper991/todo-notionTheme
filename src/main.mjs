@@ -1,4 +1,5 @@
 import App from "./App.mjs";
+import { LS_COLUMNS } from "./Const.mjs";
 
 const columnData = [
   {
@@ -15,4 +16,5 @@ const columnData = [
   },
 ];
 
-new App(document.getElementById("App"), columnData);
+localStorage.setItem(LS_COLUMNS, JSON.stringify(columnData));
+new App(document.getElementById("App"));

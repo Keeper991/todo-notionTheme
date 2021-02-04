@@ -43,6 +43,20 @@ class ItemMenu {
     this._overlay.classList.add("active");
   }
 
+  setPosition(x, y) {
+    if (y + this._menu.offsetHeight > window.innerHeight) {
+      this._menu.style.top = `${y - this._menu.offsetHeight}px`;
+    } else {
+      this._menu.style.top = `${y}px`;
+    }
+
+    if (x + this._menu.offsetWidth > window.innerWidth) {
+      this._menu.style.left = `${x - this._menu.offsetWidth}px`;
+    } else {
+      this._menu.style.left = `${x}px`;
+    }
+  }
+
   setColumnData(columnData) {
     this._select.innerHTML = "";
 
@@ -57,6 +71,8 @@ class ItemMenu {
   }
 
   handleSelect() {
+    this.inactive();
+
     const curList = document.querySelector(`.column.${this._columnName} ul`);
     curList.removeChild(this._item);
 

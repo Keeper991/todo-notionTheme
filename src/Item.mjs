@@ -15,8 +15,9 @@ class Item {
 
     this._item.appendChild(input);
     this._item.appendChild(
-      new MenuBtn(() => {
+      new MenuBtn((e) => {
         ItemMenu.setItemData(this);
+        ItemMenu.setPosition(e.clientX, e.clientY);
       })
     );
 

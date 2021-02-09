@@ -1,0 +1,50 @@
+.menu-overlay,
+.menu {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: opacity .1s linear, visibility .1s linear;
+  z-index: 99;
+}
+
+.menu-overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.menu {
+  border: solid 1px var(--gray);
+  border-radius: var(--border-radius);
+  box-shadow: 1px 1px 5px .1px var(--silver);
+  background-color: var(--white);
+  display: inline-block;
+  width: 30%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.menu li {
+  width: 100%;
+  padding: 1em;
+}
+
+.menu li {
+  border-bottom: 1px solid var(--gray);
+}
+
+.menu li:not(.li-select):hover {
+  background-color: var(--white-gray);
+  cursor: pointer;
+}
+
+.menu select {
+  width: 100%;
+  margin-top: .2em;
+}
+
+.active {
+  visibility: visible;
+  opacity: 1;
+}

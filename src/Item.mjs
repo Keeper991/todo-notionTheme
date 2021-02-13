@@ -6,20 +6,22 @@ class Item {
   _item = document.createElement("li");
   _id = null;
 
-  constructor(id, column, ItemMenu) {
+  constructor(id, column, ItemMenu, value) {
     this._id = id;
     this._item.setAttribute("data-id", id);
     this._item.className = "item";
 
     const input = document.createElement("input");
     input.placeholder = "내용을 입력하세요.";
+    input.value = value ? value : "";
 
     let data = {
       id: this._id,
       column: column,
-      value: "",
+      value,
     };
 
+    // value onChange
     let timer = setTimeout(() => null, 1000);
     input.addEventListener("keyup", (e) => {
       clearTimeout(timer);

@@ -1,6 +1,7 @@
 import Column from "./Column.mjs";
 import Menu from "./Menu.mjs";
 import { LS_COLUMNS, LS_SELECTEDITEM, LS_ITEMS } from "./Const.mjs";
+import Item from "./Item.mjs";
 
 class App {
   constructor(app) {
@@ -80,9 +81,16 @@ class App {
     columnData.map((cd) => {
       app.appendChild(new Column(cd, ItemMenu));
     });
+
+    // load localStorage
+    const items = JSON.parse(localStorage.getItem(LS_ITEMS));
+    if (items) {
+      items.map((item) => {
+        const columnUl = document.querySelector(`.${item.column} ul`);
+        columnUl.prepend(new Item(item.id, item.column, ItemMenu, item.value));
+      });
+    }
   }
 }
-
-const load = () => {};
 
 export default App;

@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "http-server",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {

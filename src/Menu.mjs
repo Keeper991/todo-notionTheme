@@ -1,4 +1,6 @@
-class ItemMenu {
+import { LS_SELECTEDITEM } from "./Const.mjs";
+
+class Menu {
   _menu = document.createElement("ul");
   _overlay = document.createElement("div");
 
@@ -8,7 +10,12 @@ class ItemMenu {
 
     this._menu.className = "menu";
 
-    const { parent, menuList } = config;
+    const { name, parent, menuList } = config;
+
+    if (name) {
+      this._menu.classList.add(name);
+      this._overlay.classList.add(`${name}-overlay`);
+    }
 
     if (parent) {
       parent.appendChild(this._overlay);
@@ -32,7 +39,7 @@ class ItemMenu {
             select.addEventListener("change", () => this.inactive());
 
             options.map((opt) => {
-              select.innerHTML += `<option class=opt__${opt.name}>${opt.title}</option>`;
+              select.innerHTML += `<option value=${opt.name}>${opt.title}</option>`;
             });
 
             li.classList.add("li-select");
@@ -55,6 +62,11 @@ class ItemMenu {
 
     return {
       active: () => {
+        const selectedStatus = JSON.parse(localStorage.getItem(LS_SELECTEDITEM))
+          .column;
+        const select = this._menu.getElementsByTagName("select")[0];
+        select.value = selectedStatus;
+
         this._menu.classList.add("active");
         this._overlay.classList.add("active");
       },
@@ -80,4 +92,4 @@ class ItemMenu {
   }
 }
 
-export default ItemMenu;
+export default Menu;

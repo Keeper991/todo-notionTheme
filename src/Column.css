@@ -1,7 +1,7 @@
 .column {
   position: relative; 
   overflow-y: scroll;
-  scroll-behavior: none;
+  height: 100%;
 }
 
 .column__header {
@@ -13,9 +13,18 @@
 }
 
 .column__header > span {
-  background-color: #badc58;
   padding: .2em .75em;
   border-radius: var(--border-radius);
+}
+
+.column__header > span:first-child {
+  background-color: #badc58;
+  margin-right: .5em;
+}
+
+.column__cnt {
+  color: var(--gray);
+  cursor: default;
 }
 
 .column ul {
@@ -71,19 +80,5 @@
 
 .column .menuBtn:hover {
   background-color: var(--gray);
-}
-
-.column .createBtn {
-  background-color: transparent;
-  border: solid 1px transparent;
-  border-radius: var(--border-radius);
-  color: var(--dark-gray);
-  padding: .5em;
-  width: 100%;
-  text-align: left;
-}
-
-.column .createBtn:hover {
-  background-color: var(--white-gray);
 }
 

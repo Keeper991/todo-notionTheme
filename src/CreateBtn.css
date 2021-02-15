@@ -1,0 +1,13 @@
+.createBtn {
+  background-color: transparent;
+  border: solid 1px transparent;
+  border-radius: var(--border-radius);
+  color: var(--dark-gray);
+  padding: .5em;
+  width: 100%;
+  text-align: left;
+}
+
+.createBtn:hover {
+  background-color: var(--white-gray);
+}

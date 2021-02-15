@@ -26,25 +26,17 @@ class Item {
     input.addEventListener("keyup", (e) => {
       clearTimeout(timer);
       const value = e.target.value;
-      timer = setTimeout(() => {
-        data = JSON.parse(localStorage.getItem(LS_ITEMS)).find(
-          (item) => item.id === id
-        );
-        data = { ...data, value };
-
-        let items = JSON.parse(localStorage.getItem(LS_ITEMS));
-        if (items) {
-          items = items.filter((item) => item.id !== this._id);
-          items.push(data);
-        } else {
-          items = [data];
-        }
-
-        localStorage.setItem(LS_ITEMS, JSON.stringify(items));
-      }, 1000);
+      if (e.code === "Enter") {
+        e.target.blur();
+        this.setValue(data, value);
+      } else {
+        timer = setTimeout(() => this.setValue(data, value), 1000);
+      }
     });
 
     this._item.appendChild(input);
+
+    // MenuBtn event
     this._item.appendChild(
       new MenuBtn((e) => {
         const item = JSON.parse(localStorage.getItem(LS_ITEMS)).find(
@@ -57,6 +49,22 @@ class Item {
     );
 
     return this._item;
+  }
+  setValue(data, value) {
+    data = JSON.parse(localStorage.getItem(LS_ITEMS)).find(
+      (item) => item.id === this._id
+    );
+    data = { ...data, value };
+
+    let items = JSON.parse(localStorage.getItem(LS_ITEMS));
+    if (items) {
+      items = items.filter((item) => item.id !== this._id);
+      items.push(data);
+    } else {
+      items = [data];
+    }
+
+    localStorage.setItem(LS_ITEMS, JSON.stringify(items));
   }
 }
 
